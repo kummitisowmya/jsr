@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body style="font-family: Arial; padding: 30px; background-color: #eaeaea;">
+    <div style="max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px;">
+        <h2 style="text-align: center;">Welcome {{ request.user.username }}</h2>
+
+        <div style="text-align: right; margin-bottom: 20px;">
+            <a href="{% url 'question' %}" style="padding: 10px 20px; background-color: #673ab7; color: white; text-decoration: none; border-radius: 5px;">Go to Question</a>
+        </div>
+
+        <h3>Your Submissions:</h3>
+        {% for s in submit %}
+            <div style="border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; border-radius: 5px;">
+                <p><strong>Numbers Entered:</strong> {{ s.numbers }}</p>
+                <p><strong>Second Highest:</strong> {{ s.answer }}</p>
+                <p><small><strong>Submitted:</strong> {{ s.submittedat }}</small></p>
+            </div>
+        {% empty %}
+            <p>No submissions yet.</p>
+        {% endfor %}
+        <a href="{% url 'logout' %}" style="padding: 8px 15px; background-color: #e53935; color: white; text-decoration: none; border-radius: 5px;">Logout</a>
+
+    </div>
+
+    <div style="margin-top: 20px;">
+    <a href="{% url 'export_excel' %}" style="padding: 10px 20px; background-color: green; color: white; text-decoration: none; border-radius: 5px;">Download Excel</a>
+    </div>
+
+</body>
+</html>
